@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fonctions</title>
+</head>
+<body>
+    <script>
+        function getPrixCine(typeTarif) {
+
+            switch (typeTarif == ) {
+                case 'Senior':
+                    reduction = 20%;
+                    break;
+                case 'Etudiant':
+                    reduction = 30%;
+                    break;
+                case 'Enfant':
+                    reduction = 25%;
+                    break;
+                break;
+                default:
+                    reduction = 0;
+            }
+
+            var prixBase = 11;
+            var prixFinal = prixBase * (1 - reduction);
+
+            return prixFinal;
+        }
+
+    </script>
+</body>
+</html>
