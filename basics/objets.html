@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objets</title>
+</head>
+<body>
+
+    <script>
+    
+    var MyObject = {
+        prix: 789,
+        reduction: 45
+    };
+
+    var Cinema = {
+
+        nom: 'TNB',
+
+        nbSalles: 2,
+
+        tarif: {
+            enfant: false,
+            etudiant: true,
+            chomeur: true, 
+            carnet:true
+        },
+
+        films: [
+            { titre: 'Alien', duree: 115, annee: 1979 },
+            { titre: 'The Big Lebowski', duree: 115, annee: 1996 },
+            { titre: 'Platoon', duree: 200, annee: 1975 }
+        ],
+
+        affichePrixPlace: function(reduction) {
+            console.log(11 - reduction);
+        }
+    };
+
+    if (Cinema.tarif.carnet) {
+        console.log('Il existe un tarif réduit carnet');
+    }
+    
+    console.log(Cinema.nom);
+    Cinema.affichePrixPlace(3);
+
+    // Durée de Platoon
+    console.log(Cinema.films[2].duree);
+
+    // Liste des fiches à l'affiche cette semaine
+    document.write("<h1>Liste des films à l'affiche</h1>");
+    document.write("<ul>");
+    for (let i = 0; i < Cinema.films.length; i++) {
+        document.write('<li>' + Cinema.films[i].titre);
+        
+        if (Cinema.films[i].titre == 'Alien') {
+            document.write(' (<strong>sortie de la semaine</strong>)');
+        }
+        document.write('</li>');
+    }
+    document.write("</ul>")
+    </script>
+    
+</body>
+</html>
