@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objets Element HTML</title>
+</head>
+<body>
+    <h1 id="titre-ppal">Objet HTML</h1>
+
+    <script>
+
+        console.dir( document.getElementById('titre-ppal') );
+
+        // Change le titre au clic
+        document.getElementById('titre-ppal').addEventListener('click', function() {
+            document.getElementById('titre-ppal').innerHTML = "Hello Dude";
+        })
+    </script>
+    
+</body>
+</html>
