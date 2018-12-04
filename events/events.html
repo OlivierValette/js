@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Events</title>
+    <style>
+        .level {
+            height: 500px;
+        }
+        #level101 {background-color: #aa45e2}
+        #level102 {background-color: orange}
+        #level103 {background-color: brown}
+        #level104 {background-color: lightseagreen}
+    </style>
+</head>
+<body>
+    <h1 id="titre">Events</h1>
+
+    <form action="record.php" id="formContact">
+        <label>Inscrivez-vous à la newsletter</label>
+        <input type="email" name="email" placeholder="Saisissez votre email">
+        <br>
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <!-- scroll event test -->
+    <div class="level" id="level101"></div>
+    <div class="level" id="level102"></div>
+    <div class="level" id="level103"></div>
+    <div class="level" id="level104"></div>
+    
+    <script>
+        var titre = document.getElementById('titre');
+        
+        // On click
+        titre.addEventListener('click', function(event) {
+            console.dir(event);
+            alert('Détection d\'un clic');
+        });
+
+        // Rollover effect (basic implement)
+        titre.addEventListener('mouseover', function() {
+            titre.innerHTML = 'Bob'
+        });
+        titre.addEventListener('mouseout', function() {
+            titre.innerHTML = 'Events'
+        });
+        
+        // Controls on form submit (on click or on enter)
+        // Get form tag
+        var formContact = document.getElementById('formContact');
+        // Get email entered on input
+        var inputEmail = document.querySelector('#formContact input[type="email"]')
+        // Caution: event applies on form tag, not on submit button
+        formContact.addEventListener('submit', function(event) {
+            // see the input
+            console.dir(inputEmail.value);
+            // test null input
+            if (inputEmail.value == '') {
+                // stop default action of the browser
+                event.preventDefault();
+                alert('Vous devez remplir le champ email !')
+            }
+        });
+        
+        // keypress event
+        document.addEventListener('keypress', function(event) {
+            console.log(event.key);
+        });
+
+        // Scroll event
+        window.addEventListener('scroll', function (event) {
+            // get scroll vertical position
+            console.dir(window.scrollY);
+        });
+
+    </script>
+</body>
+</html>
