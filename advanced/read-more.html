@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Read more</title>
+    <style>
+        article {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width: 500px;
+            margin: auto;
+        }
+        #hidden-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Article: read more...</h1>
+    <article>
+        <h2>JavaScript events</h2>
+        <p>
+            <strong>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic aperiam minus molestiae corporis perferendis earum excepturi incidunt cupiditate dolores libero?
+            </strong>
+            <br>
+            &bullet;&bullet;&bullet; 
+            <span id="suite">
+                <button type="button">&UpArrowDownArrow;</button>
+            </span>
+        </p>
+        <div id="hidden-content">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+        </div>
+    </article>
+
+    <script>
+    
+        var texte = document.getElementById('hidden-content');
+        var suite = document.getElementById('suite');
+
+        suite.addEventListener('click', function(event) {
+            if (texte.style.display == 'block') {
+                texte.style.display = 'none'; 
+            } else {
+                texte.style.display = 'block'; 
+            }
+        });
+    
+    </script>
+
+</body>
+</html>
