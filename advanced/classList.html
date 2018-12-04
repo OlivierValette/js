@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>classList</title>
+    <style>
+        body .skin1 {
+            background-color: rgba(0, 0, 255, 0,2);
+        }
+        h1 .skin1 {
+            font-size-adjust: verdana;
+            font-size: 50px;
+            color: green;
+        }
+        article .skin1 {
+            font-size-adjust: verdana;
+            width: 500px;
+            margin: auto;
+            color: #333,
+        }
+        body .skin2 {
+            background-color: rgba(0, 0, 255, 0,2);
+        }
+        h1 .skin2 {
+            font-size-adjust: arial;
+            font-size: 50px;
+            color: brown;
+        }
+        article .skin2 {
+            font-size-adjust: arial;
+            width: 500px;
+            margin: auto;
+            color: #333,
+        }
+    </style>
+</head>
+<body class="skin1">
+    <h1>Article: read more...</h1>
+    <span id="charte">
+            <button type="button">Canger la charte</button>
+        </span>
+    <article>
+        <h2>JavaScript events</h2>
+        <p>
+            <strong>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic aperiam minus molestiae corporis perferendis earum excepturi incidunt cupiditate dolores libero?
+            </strong>
+            <br>
+            &bullet;&bullet;&bullet; 
+            <span id="suite">
+                <button type="button">&UpArrowDownArrow;</button>
+            </span>
+        </p>
+        <div id="hidden-content">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit enim magni officia voluptatibus commodi repudiandae eaque eos impedit eligendi deserunt, amet error minima aspernatur quae facilis deleniti nemo consequuntur cupiditate omnis? Iste ad, quasi iusto accusantium sint velit maxime, qui eligendi tenetur quisquam non incidunt sed autem illum nisi ratione. </p>
+        </div>
+    </article>
+
+    <script>
+        var myButton = document.getElementById('charte');
+        var bodySite = document.getElementsByClassName('body')[0];
+
+        myButton.addEventListener('click', function() {
+            bodySite.classList.replace('skin1', 'skin2');
+        })
+    
+        var texte = document.getElementById('hidden-content');
+        var suite = document.getElementById('suite');
+
+        suite.addEventListener('click', function(event) {
+            if (texte.style.display == 'block') {
+                texte.style.display = 'none'; 
+            } else {
+                texte.style.display = 'block'; 
+            }
+        });
+    
+    </script>
+    
+</body>
+</html>
