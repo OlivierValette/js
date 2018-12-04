@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Popin</title>
+    <style>
+        .popin {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            margin-left: -250px;
+            padding-left: 15px;
+            z-index: 999;
+            width: 500px;
+            min-height: 400px;
+            background-color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: none;
+        }
+        .popin-close {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .popin-overlay {
+            background-color: rgba(0,0,0,0.7);
+            display: none;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 998;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Popin</h1>
+
+    <div class="popin">
+        <p class="popin-content">Inscrivez-vous à la newsletter</p>
+        <span class="popin-close">&times;</span>
+    </div>
+    <div class="popin-overlay"></div>
+
+    <script>
+
+        var popin = document.getElementsByClassName('popin');
+        var popinOverlay = document.getElementsByClassName('popin-overlay');
+        var popinClose = document.getElementsByClassName('popin-close');
+
+        setTimeout(function() {
+            popin[0].style.display = 'block';
+            popinOverlay[0].style.display ='block';
+        }, 3000);
+
+        popinClose[0].addEventListener('click', function() {
+            popin[0].style.display = 'none';
+            popinOverlay[0].style.display ='none';
+        });
+    
+    </script>
+</body>
+</html>
