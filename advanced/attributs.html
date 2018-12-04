@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attributs</title>
+</head>
+<body>
+    <h1 id="titre">Les attributs</h1>
+
+    <a href="http://perdu.com" title="Lien vers perdu.com">Perdu.com</a>
+    <br>
+    <img src="lion.jpg" alt="Lion">
+    <br>
+    <button type="button" id="toggle-img">Changer l'image</button>
+
+
+    <script>
+    
+        var myImage = document.getElementsByTagName('img')[0];
+        var bouton = document.getElementById('toggle-img');
+
+        bouton.addEventListener('click', function(event) {
+            myImage.src = 'cat.jpg'; 
+            myImage.alt = 'Chat';
+        });
+
+    </script>
+    
+</body>
+</html>
