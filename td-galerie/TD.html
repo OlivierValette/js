@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TD</title>
+	<meta charset="UTF-8">
+	<style>
+	body { font-family: sans-serif; }
+	li, ul { margin: 0; padding: 0;  }
+	* { box-sizing: border-box; }
+	
+	.title {
+		text-align: center;
+	}
+	
+	.galerie {
+		width: 300px;
+		margin: 50px auto 0;
+		overflow: hidden;
+		border: 3px solid black;
+	}
+	
+	.galerie-viewport {
+		position: relative;
+		width: 9999px;
+		height: 200px;
+		overflow: hidden;
+		font-size: 0;
+	}
+	
+	.galerie-list {
+		position: absolute;
+		top: 0;
+		transition: left 0.5s;
+	}
+	
+	.galerie-item {
+		width: 300px;
+		height: 200px;
+		overflow: hidden;
+		display: inline-block;
+	}
+	
+	.galerie-item img {
+		width: 100%;
+	}
+		
+	.navigation {
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<h1>Travail en autonomie</h1>
+	<h2>Création d'une galerie</h2>
+	<p>Objectif : créer un slider d'images à partir d'un tableau de données</p>
+	<ol>
+		<li>Générer la galerie d'images dynamiquement grâce aux données stockées dans le tableau dataMonkey</li>
+		<li>Au clic sur les boutons "Suivant" ou "Précédent", la galerie affiche l'image suivante ou précédente</li>
+		<li>Lors d'un changement d'image, utiliser le tableau de données "dataMonkey" pour mettre à jour le panneau d'informations</li>
+		<li>Empêcher le dépassement (et l'erreur dans la console) lorsque la dernière ou la première image sont atteintes</li>
+		<li>Ajouter un effet d'animation</li>
+	</ol>
+
+	<p>Aide
+	<ol>
+		<li>Récupérer les balises images de la galerie et injecter dans chaque attribut src le bon nom de fichier en utilisant la propriété src des objets du tableau dataMonkey</li>
+		<li>Modifier la propriété left</li>
+		<li>Mettre à jour une variable index, ou key qui s'incrémente ou se décrémente en fonction du click sur Suivant ou Précédent...</li>
+	</ol>
+	</p>
+
+	<nav class="galerie">
+		<div class="galerie-viewport">
+			<ul class="galerie-list" id="galerie-list" style="left: 0px">
+				<li class="galerie-item"><img src=""></li>
+				<li class="galerie-item"><img src=""></li>
+				<li class="galerie-item"><img src=""></li>
+				<li class="galerie-item"><img src=""></li>
+			</ul>
+		</div>
+	</nav>
+	<nav class="navigation">
+		<button type="button" id="prev">Précédent</button>
+		<button type="button" id="next">Suivant</button>
+	</nav>
+
+	<h2>Informations</h2>
+	<article id="infos">
+		<p>Espèce : <span></span></p>
+		<p>Taille : <span></span></p>
+		<p>Répartition : <span></span></p>
+	</article>
+
+	<script>
+
+		var dataMonkey = [
+			{
+				espece: 'Gibbon',
+				taille: '40cm - 60cm',
+				repartition: 'Chine - Indonésie',
+				src: 'gibbon.jpg',
+			},
+			{
+				espece: 'Ouistiti',
+				taille: '20cm - 40cm',
+				repartition: 'Nord-est du Brésil',
+				src: 'ouistiti.jpg',
+			},
+			{
+				espece: 'Chimpanzé',
+				taille: '120cm',
+				repartition: 'Afrique Centrale',
+				src: 'chimpanze.jpg',
+			},
+			{
+				espece: 'Paresseux',
+				taille: '40cm - 80cm',
+				repartition: 'Amérique tropicale',
+				src: 'paresseux.jpg',
+			}
+		];
+
+		// Initializations
+		//
+
+		// Get <img> tags inside galerie-item class <li>
+		var galleryImage = document.querySelectorAll('li.galerie-item img');
+		// Initialize gallery by adding filenames in src attributes
+		for (let i = 0; i < dataMonkey.length; i++) {
+			galleryImage[i].src = dataMonkey[i].src;
+		}
+
+
+		
+		// Function used to update data once a given key is selected
+		//
+
+		// Get left attribute of <ul> tag 
+		var galleryTag = document.getElementById('galerie-list');
+
+		// Get image width as defined width in 'galerie' class in CSS
+		var galleryWidth = window.getComputedStyle(document.getElementsByClassName('galerie')[0]).getPropertyValue('width');
+		galleryWidth =  galleryWidth.substring(0, galleryWidth.length - 2);  // Remove px
+
+		// Get <span> tags inside infos id <article>
+		var infoMonkey = document.querySelectorAll('#infos span');
+		
+		function galleryUpdate(item) {
+			// Select picture in gallery by setting left offset in <ul> tag
+			galleryTag.style.left = (- item * galleryWidth) + 'px'
+			// Initialize infos in span content
+			infoMonkey[0].innerHTML = dataMonkey[item].espece;
+			infoMonkey[1].innerHTML = dataMonkey[item].taille;
+			infoMonkey[2].innerHTML = dataMonkey[item].repartition;
+		}
+
+		// Start with first monkey
+		var key = 0;
+		galleryUpdate(key);
+
+		// Events management
+		var boutonPrev = document.getElementById('prev');
+		var boutonNext = document.getElementById('next');
+
+        boutonPrev.addEventListener('click', function(event) {
+			// index decrement
+			if (key > 0) { key-- }
+			// update monkey
+			galleryUpdate(key);
+        });
+
+        boutonNext.addEventListener('click', function(event) {
+			// index increment
+			if (key < dataMonkey.length - 1) { key++ }
+			// update monkey
+			galleryUpdate(key);
+        });
+
+	</script>
+
+</body>
+</html>
