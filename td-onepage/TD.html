@@ -16,7 +16,7 @@
 	#level01 { background-color: rgb(255, 217, 0); }
 	#level02 { background-color: brown; }
 	#level03 { background-color: aqua; }
-	#level04 { background-color: lightgreen; }
+	#level04 { background-color: rgb(63, 214, 131); }
 	
 	.navigation {
 		position: fixed;
@@ -70,50 +70,69 @@
 
 <script>
 
-	// Browser screen sizes at page loading
-	var browserHeight = window.innerHeight
-	var browserWidth = window.innerWidth
-	
-	// Browser screen sizes in case of browser resize
-	window.addEventListener('resize', function() {
-		var browserHeight = window.innerHeight
-		var browserWidth = window.innerWidth
-	});
-
-	// Get class 'level' div tags
-	var levelDiv = document.getElementsByClassName('level');
-
-	// Set sizes of level div
-	for (let i = 0; i < 4; i++) {
-		levelDiv[i].style.height = browserHeight + 'px';
-		levelDiv[i].style.width = browserWidth + 'px';
-	}
-
-	const SCROLL_TIME_STEP = 40; 		// in ms (25 steps every second)
-	const MAX_STEPS_NUMBER = 50;		// maximum move takes 2 seconds 
-
-	// Get navigation items
-	var navButton = document.getElementsByClassName('navigation-item');
-
-	// Wait for block selection on navigation buttons
-	for (let i = 0; i < 4; i++) {
-		navButton[i].addEventListener('click', function() {
-			// Scroll from present position
-			let startingHeight = window.scrollY;
-			// To selected block position
-			let endingHeight = i * browserHeight;
-			// In steps steps (with constant speed)
-			let steps = Math.abs(endingHeight - startingHeight) / (3 * browserHeight) * MAX_STEPS_NUMBER;
-			console.log(steps);
-			let step = 1;
-			let intervalId = setInterval(function() {
-				window.scrollTo(0, startingHeight + ( endingHeight - startingHeight) * step / steps);
-				step++;
-				if (step > steps) { clearInterval(intervalId) };
-			}, SCROLL_TIME_STEP);
-		console.log(window.scrollY);
+	function onePageScroll() {
+		// Restart on top of site on reload
+		window.addEventListener("beforeunload", function () {
+			window.scrollTo(0, 0);
 		});
+
+		// Get class 'level' div tags
+		var levelDiv = document.getElementsByClassName('level');
+
+		// Set sizes of level div
+		for (let i = 0; i < 4; i++) {
+			levelDiv[i].style.height = browserHeight + 'px';
+			levelDiv[i].style.width = browserWidth + 'px';
+		}
+
+		const SCROLL_TIME_STEP = 40; 		// in ms (25 steps every second)
+		const MAX_STEPS_NUMBER = 50;		// maximum move takes 2 seconds 
+
+		// Get navigation items
+		var navButton = document.getElementsByClassName('navigation-item');
+
+		// Wait for block selection on navigation buttons
+
+		console.log(browserHeight);
+
+		for (let i = 0; i < 4; i++) {
+			navButton[i].addEventListener('click', function() {
+				// Scroll from present position
+				let startingHeight = window.scrollY;
+				console.log(startingHeight);
+				// To selected block position
+				let endingHeight = i * browserHeight;
+				// In steps steps (with constant speed)
+				let steps = Math.round(Math.abs(endingHeight - startingHeight) / (3 * browserHeight) * MAX_STEPS_NUMBER);
+				console.log(steps);
+				let step = 1;
+				let intervalId = setInterval(function() {
+					window.scrollTo(0, startingHeight + ( endingHeight - startingHeight) * step / steps);
+					step++;
+					if (step == steps) { 
+						// Finish scroll to avoid rounding errors
+						window.scrollTo(0, endingHeight);
+						clearInterval(intervalId);
+					};
+				}, SCROLL_TIME_STEP);
+			console.log(window.scrollY);
+			});
+		}
+
 	}
+
+	// Browser screen sizes at page loading
+	var browserHeight = window.innerHeight;
+	var browserWidth = window.innerWidth - ((window.scrollbars.visible) ? 20 : 0);
+	// Render page
+	onePageScroll();
+	
+	window.addEventListener('resize', function() {
+		// New screen sizes values in case of browser resize
+		browserHeight = window.innerHeight;
+		browserWidth = window.innerWidth - ((window.scrollbars.visible) ? 20 : 0);
+		onePageScroll();
+	});
 
 </script>
 
