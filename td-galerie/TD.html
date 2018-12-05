@@ -30,7 +30,7 @@
 	.galerie-list {
 		position: absolute;
 		top: 0;
-		transition: left 0.5s;
+		transition: left 0.8s cubic-bezier(.3, 1.0, 1, -0.7);
 	}
 	
 	.galerie-item {
@@ -129,7 +129,6 @@
 		for (let i = 0; i < dataMonkey.length; i++) {
 			galleryImage[i].src = dataMonkey[i].src;
 		}
-
 
 		
 		// Function used to update data once a given key is selected
