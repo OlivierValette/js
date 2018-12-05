@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TD</title>
+	<meta charset="UTF-8">
+	<style>
+	body { padding: 0; height: 100%; font-family: sans-serif; }
+	* { margin: 0; padding: 0;  }
+	* { box-sizing: border-box; }
+	ol { padding: 20px; }
+	li { margin: 0 0 0 20px; }
+	ul li { list-style: none; }
+	
+	.level { padding: 20px; }
+	
+	#level01 { background-color: rgb(255, 217, 0); }
+	#level02 { background-color: brown; }
+	#level03 { background-color: aqua; }
+	#level04 { background-color: lightgreen; }
+	
+	.navigation {
+		position: fixed;
+		top: 37%;
+		right: 20px;
+		width: 50px;
+		background-color: yellow;
+		overflow: hidden;
+		border: 3px solid black;
+	}
+		
+	.navigation li {
+		height: 30px;
+		border: 2px solid grey;
+	}
+
+	</style>
+</head>
+<body>
+
+<div class="level" id="level01">
+	<h1>Travail en autonomie</h1>
+	<h2>Création d'un site one-page</h2>
+	<p>Objectif : créer un site scrollable dont chaque page correspond à une div dont la surface correspond à celle de l'écran</p>
+	<ol>
+		<li>Attribuer dynamiquement à chaque div de classe level une hauteur et une largeur correspondant à la hauteur et à la largeur du navigateur</li>
+		<li>Au clic sur un item du menu de navigation, le navigateur doit scroller automatiquement au div de classe level correspondant</li>
+		<li>Ajouter un effet d'animation au scroll avec setInterval()</li>
+	</ol>
+
+	<p>Aide</p>
+	<ol>
+		<li>Etudier les propriétés de l'objet window (en particulier ses propriétés de hauteur et de largeur)</li>
+		<li>Etudier la méthode scrollTo() de l'objet window : <a href="https://developer.mozilla.org/fr/docs/Web/API/Window/scrollTo">https://developer.mozilla.org/fr/docs/Web/API/Window/scrollTo</a></li>
+		<li>Utiliser scrollTo() à l'intérieur d'une boucle setInterval() pour créer un effet de scroll animé et progressif. Penser à stopper la boucle lorsque la valeur du scroll est atteinte avec clearInterval()</li>
+	</ol>
+	<p>Level 1</p>
+</div>
+<div class="level" id="level02">Level 2</div>
+<div class="level" id="level03">Level 3</div>
+<div class="level" id="level04">Level 4</div>
+
+
+<ul class="navigation" id="navigation">
+	<li class="navigation-item">1</li>
+	<li class="navigation-item">2</li>
+	<li class="navigation-item">3</li>
+	<li class="navigation-item">4</li>
+</ul>
+
+
+<script>
+
+	// Browser screen sizes at page loading
+	var browserHeight = window.innerHeight
+	var browserWidth = window.innerWidth
+	
+	// Browser screen sizes in case of browser resize
+	window.addEventListener('resize', function() {
+		var browserHeight = window.innerHeight
+		var browserWidth = window.innerWidth
+	});
+
+	// Get class 'level' div tags
+	var levelDiv = document.getElementsByClassName('level');
+
+	// Set sizes of level div
+	for (let i = 0; i < 4; i++) {
+		levelDiv[i].style.height = browserHeight + 'px';
+		levelDiv[i].style.width = browserWidth + 'px';
+	}
+
+	const SCROLL_TIME_STEP = 40; 		// in ms (25 steps every second)
+	const MAX_STEPS_NUMBER = 50;		// maximum move takes 2 seconds 
+
+	// Get navigation items
+	var navButton = document.getElementsByClassName('navigation-item');
+
+	// Wait for block selection on navigation buttons
+	for (let i = 0; i < 4; i++) {
+		navButton[i].addEventListener('click', function() {
+			// Scroll from present position
+			let startingHeight = window.scrollY;
+			// To selected block position
+			let endingHeight = i * browserHeight;
+			// In steps steps (with constant speed)
+			let steps = Math.abs(endingHeight - startingHeight) / (3 * browserHeight) * MAX_STEPS_NUMBER;
+			console.log(steps);
+			let step = 1;
+			let intervalId = setInterval(function() {
+				window.scrollTo(0, startingHeight + ( endingHeight - startingHeight) * step / steps);
+				step++;
+				if (step > steps) { clearInterval(intervalId) };
+			}, SCROLL_TIME_STEP);
+		console.log(window.scrollY);
+		});
+	}
+
+</script>
+
+</body>
+</html>
